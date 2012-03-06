@@ -8,10 +8,24 @@ exec >>park.log 2>&1
 n=0
 dir=../httproot/default/parken
 touch $dir/index.new
-for i in `cat data/flist`; do
+(for i in `cat data/flist`; do
 	ln -f $i.png $dir/day-$n.png
-	echo '<p><img src="'"day-$n.png"'">' >>$dir/index.new
+	case "$n" in
+	0)
+		echo '<p>Heute:'
+		;;
+	1)
+		echo '<p>Gestern:'
+		;;
+	2)
+		echo '<p>Vorgestern:'
+		;;
+	*)
+		echo "<p>Vor $n Tagen:"
+		;;
+	esac
+	echo '<p><img src="'"day-$n.png"'">'
 	n=`expr $n + 1`
-done
+done) >>$dir/index.new
 # Actually, after a few days the index will never change again...
 mv -f $dir/index.new $dir/index.html
