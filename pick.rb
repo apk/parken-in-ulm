@@ -75,18 +75,17 @@ end
 
 dofile(fnm)
 
-fn={}
-fn[fnm]=true
+fn=[fnm]
 begin
   File.open("data/flist") do |f|
     f.each_line do |l|
-      fn[l.strip]=true
+      fn<<=l.strip
     end
   end
 rescue Errno::ENOENT
 end
 File.open("data/flist","w") do |f|
-  fn.keys.sort.reverse[0..7].each do |n|
+  fn.sort.uniq.reverse[0..7].each do |n|
     f.puts n
   end
 end
