@@ -10,6 +10,7 @@ dir=../httproot/default/parken
 touch $dir/index.new
 (for i in `cat data/flist`; do
 	ln -f $i.png $dir/day-$n.png
+	ln -f $i-n.png $dir/day-$n-s.png
 	case "$n" in
 	0)
 		echo '<p>Heute:'

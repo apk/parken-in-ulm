@@ -25,18 +25,23 @@ def dofile(name)
       end
     end
   end
-  IO.popen("gnuplot","w") do |f|
-    f.puts "set terminal png size 640,256"
-    f.puts "set output \"#{name}.png\""
-    f.puts "set title \"Freie Plaetze\""
-    f.puts "set xrange [0:24]"
-    f.puts "set grid"
-    z=1
-    s=houses.map do |a|
-      z+=1
-      "\"tmp.data\" using 1:#{z} with lines title \"#{a}\""
+  [
+    { :a => 640, :n => "" },
+    { :a => 500, :n => "-n" }
+  ].each do |k|
+    IO.popen("gnuplot","w") do |f|
+      f.puts "set terminal png size #{k[:a]},256"
+      f.puts "set output \"#{name}#{k[:n]}.png\""
+      f.puts "set title \"Freie Plaetze\""
+      f.puts "set xrange [0:24]"
+      f.puts "set grid"
+      z=1
+      s=houses.map do |a|
+        z+=1
+        "\"tmp.data\" using 1:#{z} with lines title \"#{a}\""
+      end
+      f.puts "plot #{s.join','}"
     end
-    f.puts "plot #{s.join','}"
   end
 end
 
