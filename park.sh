@@ -11,22 +11,23 @@ touch $dir/index.new
 (for i in `cat data/flist`; do
 	ln -f $i.png $dir/day-$n.png
 	ln -f $i-n.png $dir/day-$n-s.png
+	d=`echo $n * 86400 | bc`
+	d="`date -r $d +'%Y-%m-%d'`"
 	case "$n" in
 	0)
-		echo '<p>Heute:'
+		echo '<p>('"$d"') Heute:'
 		;;
 	1)
-		echo '<p>Gestern:'
+		echo '<p>('"$d"') Gestern:'
 		;;
 	2)
-		echo '<p>Vorgestern:'
+		echo '<p>('"$d"') Vorgestern:'
 		;;
 	*)
-		echo "<p>Vor $n Tagen:"
+		echo "<p>('"$d"') Vor $n Tagen:"
 		;;
 	esac
 	echo '<p><img src="'"day-$n.png"'">'
 	n=`expr $n + 1`
 done) >>$dir/index.new
-# Actually, after a few days the index will never change again...
 mv -f $dir/index.new $dir/index.html
