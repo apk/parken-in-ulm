@@ -13,7 +13,7 @@ touch $dir/index.new
 	ln -f $i-n.png $dir/day-$n-s.png
 	# Needs gnu date, not darwin's date
 	# (and of course not solaris')
-	d="~ `TZ=GMT+2 date -r $i.png +'%Y-%m-%d'`"
+	d="~ `TZ=GMT date -r $i.png +'%Y-%m-%d'`"
 	case "$n" in
 	0)
 		echo '<p>('"$d"') Heute:'
