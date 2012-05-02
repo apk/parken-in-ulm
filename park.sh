@@ -16,7 +16,7 @@ n=0
 	d="~ `TZ=GMT date -r $i.png +'%Y-%m-%d'`"
 	case "$n" in
 	0)
-		echo '<p>('"$d"') (<a href="index.html">Nur</a>) Heute:'
+		echo '<p>('"$d"') (<a href=".">Nur</a>) Heute:'
 		;;
 	1)
 		echo '<p>('"$d"') Gestern:'
