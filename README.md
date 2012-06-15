@@ -1,4 +1,4 @@
-Belegungsstand der Ulmer Parkhäuser abfragen und in Graphen verwandel.
+Belegungsstand der Ulmer Parkhäuser abfragen und in Graphen verwandeln.
 
 Braucht
 
