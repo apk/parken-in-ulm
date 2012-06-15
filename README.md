@@ -1,4 +1,6 @@
-Belegungsstand der Ulmer Parkhäuser abfragen und in Graphen verwandeln.
+Belegungsstand der Ulmer Parkhäuser
+(<a href="http://parken-in-ulm.de"><tt>http://parken-in-ulm.de</tt></a>)
+abfragen und in Graphen verwandeln.
 
 Braucht
 
