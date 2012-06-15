@@ -30,7 +30,9 @@ n=0
 	esac
 	echo '<p><img src="'"day-$n.png"'">'
 	n=`expr $n + 1`
-done) >>$dir/archive.new
+done
+echo '<p><a href="http://github.com/apk/parken-in-ulm/">Quellen/Wie's geht.</a>'
+) >>$dir/archive.new
 mv -f $dir/archive.new $dir/archive.html
 
 n=0
@@ -44,6 +46,7 @@ n=0
 		;;
 	*)
 		echo '<p><a href="archive.html">Vergangene Tage...</a>'
+		echo '<p><a href="http://github.com/apk/parken-in-ulm/">Quellen/Wie's geht.</a>'
 		break;
 		;;
 	esac
