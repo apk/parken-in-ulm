@@ -7,3 +7,5 @@ Braucht
 in der crontab, und das Zielverzeichnis (`dir` in `park.sh`)
 sollte existieren. Resultate <a href="http://nr1.h.apk.li/parken/">hier</a>
 zu sehen.
+
+Beispiel: <img src="http://nr1.h.apk.li/parken/day-0.png">.
