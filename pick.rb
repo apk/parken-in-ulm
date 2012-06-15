@@ -5,6 +5,9 @@ IO.popen("/usr/bin/wget -O - http://www.parken-in-ulm.de/") do |f|
   n=nil
   z=0
   f.each_line do |l|
+    # Just scrape out the relevant lines. We could use Rexml
+    # to properly parse the stuff, but then, it will break
+    # either way when they change the page.
     if l =~ /onClick="fenster\('parkhaeuser\/([a-z_]+)'\)">/
       n=$1
       z=0
