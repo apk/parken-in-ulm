@@ -29,7 +29,7 @@ def dofile(name)
     { :a => 640, :n => "" },
     { :a => 500, :n => "-n" }
   ].each do |k|
-    IO.popen("gnuplot","w") do |f|
+    IO.popen("gnuplot44","w") do |f|
       f.puts "set terminal png size #{k[:a]},256"
       f.puts "set output \"#{name}#{k[:n]}.png\""
       f.puts "set title \"Freie Plaetze\""
