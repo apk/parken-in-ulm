@@ -1,6 +1,6 @@
 def dofile(name)
   houses=["rathaus", "fischerviertel", "frauenstrasse",
-          "salzstadel", "sedelhof", "deutschhaus"]
+          "salzstadel", "deutschhaus", "theater"]
   File.open("#{name}.txt") do |f|
     File.open("tmp.data","w") do |of|
       f.each_line do |l|
