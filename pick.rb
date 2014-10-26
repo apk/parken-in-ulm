@@ -1,7 +1,7 @@
 require 'dofile.rb'
 
 h={}
-IO.popen("/usr/bin/wget -O - http://www.parken-in-ulm.de/") do |f|
+IO.popen("/usr/bin/wget --tries=1 -O - http://www.parken-in-ulm.de/") do |f|
   n=nil
   z=0
   f.each_line do |l|
@@ -11,7 +11,8 @@ IO.popen("/usr/bin/wget -O - http://www.parken-in-ulm.de/") do |f|
     if l =~ /onClick="fenster\('parkhaeuser\/([a-z_]+)'\)">/
       n=$1
       z=0
-    elsif l =~ /<td align="left" valign="middle">([0-9]+)<\/td>/
+    elsif l =~ /<td align="left" valign="middle">([0-9]+)<\/td>/ or
+          l.gsub(/&#160;/,'') =~ /<td align="left" valign="top">([0-9]+)<\/td>/
       # puts "n=#{n.inspect} #{z.inspect}"
       if n
         v=$1

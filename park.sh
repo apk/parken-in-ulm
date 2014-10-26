@@ -3,9 +3,13 @@ cd `dirname $0`
 LANG=C
 export LANG
 exec >>park.log 2>&1
+
+mkdir -p data
+touch data/flist
+
 /usr/bin/ruby pick.rb
 
-dir=../httproot/default/parken
+dir=../../html/parken
 
 n=0
 (for i in `cat data/flist`; do
