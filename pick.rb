@@ -1,7 +1,7 @@
 require 'dofile.rb'
 
 h={}
-IO.popen("/usr/bin/wget -O - http://www.parken-in-ulm.de/") do |f|
+IO.popen("/usr/bin/wget --tries=1 -O - http://www.parken-in-ulm.de/") do |f|
   n=nil
   z=0
   f.each_line do |l|
