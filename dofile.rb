@@ -26,11 +26,12 @@ def dofile(name)
     end
   end
   [
-    { :a => 640, :n => "" },
-    { :a => 500, :n => "-n" }
+    { :a => 1024, :n => "-b", :lw => 3, :h => 384 },
+    { :a => 640, :n => "", :lw => 2, :h => 256 },
+    { :a => 500, :n => "-n", :lw => 1, :h => 256 }
   ].each do |k|
     IO.popen("gnuplot44","w") do |f|
-      f.puts "set terminal png size #{k[:a]},256"
+      f.puts "set terminal png size #{k[:a]},#{k[:h]}"
       f.puts "set output \"#{name}#{k[:n]}.png\""
       f.puts "set title \"Freie Plaetze\""
       f.puts "set xrange [0:24]"
@@ -38,7 +39,7 @@ def dofile(name)
       z=1
       s=houses.map do |a|
         z+=1
-        "\"tmp.data\" using 1:#{z} with lines title \"#{a}\""
+        "\"tmp.data\" using 1:#{z} with lines linewidth #{k[:lw]} title \"#{a}\""
       end
       f.puts "plot #{s.join','}"
     end
