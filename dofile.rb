@@ -17,7 +17,7 @@ def dofile(name)
           s="#{t/3600.0}"
           houses.each do |n|
             v=h[n]
-            v=0 unless v
+            v=333 unless v
             s="#{s} #{v}"
           end
           of.puts s
