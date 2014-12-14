@@ -36,6 +36,7 @@ def dofile(name)
       f.puts "set title \"Freie Plaetze\""
       f.puts "set xrange [0:24]"
       f.puts "set grid"
+      f.puts "set key horizontal"
       z=1
       s=houses.map do |a|
         z+=1
