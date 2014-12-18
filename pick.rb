@@ -31,6 +31,12 @@ h={}
   puts "h: #{h.inspect}"
   break unless h.empty?
 end
+
+if h.empty?
+  puts "No data?"
+  exit
+end
+
 t=Time.now().to_i
 s=(t%86400).to_s
 h.keys.sort.each do |k|
