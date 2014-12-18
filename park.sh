@@ -84,6 +84,7 @@ n=0
 	echo '<p><img src="'"day-$n.png"'">'
 	n=`expr $n + 1`
  done
+ cat tmp.frag
  footer
 ) >>$dir/index.new
 mv -f $dir/index.new $dir/index.html

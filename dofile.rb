@@ -1,6 +1,7 @@
 def dofile(name)
   houses=["rathaus", "fischerviertel", "frauenstrasse",
           "salzstadel", "deutschhaus", "theater"]
+  data={}
   File.open("#{name}.txt") do |f|
     File.open("tmp.data","w") do |of|
       f.each_line do |l|
@@ -14,6 +15,7 @@ def dofile(name)
             l=$'
             h[n]=v
           end
+          data[t]=h
           s="#{t/3600.0}"
           houses.each do |n|
             v=h[n]
@@ -43,6 +45,58 @@ def dofile(name)
         "\"tmp.data\" using 1:#{z} with lines linewidth #{k[:lw]} title \"#{a}\""
       end
       f.puts "plot #{s.join','}"
+    end
+  end
+
+  subdata=data.keys.sort[-5..-1]
+  if subdata
+    File.open("tmp.frag","w") do |of|
+      of.puts "<table>"
+      houses.each do |i|
+
+        sxy=0
+        sx=0
+        sy=0
+        n=0
+        sxx=0
+        xmax=0
+        ylast=0
+
+        subdata.each do |x|
+          a=data[x]
+          x=x.to_f
+          y=a[i]
+          # puts "#{x} #{y}"
+          n+=1
+          sxy+=x*y
+          sx+=x
+          sy+=y
+          sxx+=x*x
+          if xmax<x
+            xmax=x
+            ylast=y # Times are monotonic, so this works.
+          end
+        end
+        b=(n*sxy-sx*sy)/(n*sxx-sx*sx)
+        a=(sxx*sy-sx*sxy)/(n*sxx-sx*sx)
+
+        # puts "a=#{a} b=#{b}"
+        if ylast <= 10
+          s="Full"
+        elsif b < -0.005
+          x0=-a/b
+          s="In #{((x0-xmax)/60).to_i} minutes"
+        else
+          if ylast < 50
+            s="At #{ylast}"
+          else
+            s="Good"
+          end
+        end
+        of.puts "<tr><td>#{i}:</td><td>#{ylast} (#{(b*600).to_i})</td><td>#{s}</td>"
+        # puts "#{i}: #{s} (#{b.to_s[0..5]}) #{ylast}"
+      end
+      of.puts "</table>"
     end
   end
 end
